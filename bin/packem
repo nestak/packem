@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'w3c_validators'
+include W3CValidators
+require 'premailer'
+require 'packem'
+
+Packem.build
