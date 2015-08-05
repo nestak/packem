@@ -4,7 +4,7 @@ class Packem
     puts 'Building Your Newsletter...'
     self.validate_html('./index.html')
     self.create_textfile
-    # TODO: self.create_zipfile
+    self.create_zipfile
     puts "\nBuild finished."
   end
 
@@ -49,5 +49,19 @@ class Packem
     end
   end
 
+  def self.create_zipfile
+    puts "\nZipping..."
+    files = Dir.glob('./images/*.*')
+    files << './index.html'
+    files << './index.txt'
+    now   = DateTime.now
+
+    Zip::File.open(File.join('.', "#{now.iso8601.slice(0,16).gsub!(':','.')}.zip"), Zip::File::CREATE) do |zipfile|
+      files.each do |filename|
+        puts "adding #{filename}"
+        zipfile.add(filename.sub('./', ''), filename)
+      end
+    end
+  end
 
 end

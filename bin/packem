@@ -3,6 +3,7 @@
 require 'w3c_validators'
 include W3CValidators
 require 'premailer'
+require 'zip'
 require 'packem'
 
 Packem.build
